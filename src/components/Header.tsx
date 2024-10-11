@@ -9,11 +9,7 @@ export const Header: React.FC = () => {
   return (
     <header>
       <div className="mx-auto p-4">
-        <div className="flex h-16">
-          <div className="flex w-full justify-end space-x-4">
-            <Button>Sign in</Button>
-          </div>
-        </div>
+        <div className="flex h-16"></div>
       </div>
     </header>
   );
