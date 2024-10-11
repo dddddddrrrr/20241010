@@ -1,9 +1,4 @@
 import React from "react";
-import { Button } from "~/components/ui/button";
-import { useRouter, usePathname } from "next/navigation";
-import { useSession } from "next-auth/react";
-
-import { cn } from "~/lib/utils";
 
 export const Header: React.FC = () => {
   return (

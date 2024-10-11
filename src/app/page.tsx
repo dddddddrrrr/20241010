@@ -22,7 +22,7 @@ const Home = () => {
   const handleRotation = useCallback((pageIndex: number, degrees: number) => {
     setRotations((prevRotations) => {
       const newRotations = [...prevRotations];
-      newRotations[pageIndex] = (newRotations[pageIndex] || 0) + degrees;
+      newRotations[pageIndex] = (newRotations[pageIndex] ?? 0) + degrees;
       return newRotations;
     });
   }, []);
@@ -32,7 +32,7 @@ const Home = () => {
       setRotations((prevRotations) => {
         const newRotations = Array(numPages)
           .fill(0)
-          .map((_, index) => (prevRotations[index] || 0) + degrees);
+          .map((_, index) => (prevRotations[index] ?? 0) + degrees);
         return newRotations;
       });
     },
@@ -52,7 +52,7 @@ const Home = () => {
   return (
     <div className="container mx-auto flex flex-col items-center justify-center px-4 py-8">
       <h1 className="mb-8 text-4xl font-bold">Rotate PDF Pages</h1>
-      <p className="mb-8 mt-2  text-muted-foreground">
+      <p className="mb-8 mt-2 text-muted-foreground">
         Simply click on a page to rotate it. You can then download your modified
         PDF.
       </p>

@@ -5,6 +5,7 @@ import { Document, Page } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import { RotateCw } from "lucide-react";
+import { type PDFPageProxy } from "pdfjs-dist";
 
 interface PDFViewerProps {
   file: File | string;
@@ -20,6 +21,7 @@ const PDFViewer: React.FC<PDFViewerProps> = ({
   scale,
 }) => {
   const [numPages, setNumPages] = useState<number | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [error, setError] = useState<string | null>(null);
   const [fileUrl, setFileUrl] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -56,14 +58,14 @@ const PDFViewer: React.FC<PDFViewerProps> = ({
   }
 
   useEffect(() => {
-    pageRefs.current = pageRefs.current.slice(0, numPages || 0);
+    pageRefs.current = pageRefs.current.slice(0, numPages ?? 0);
   }, [numPages]);
 
   const handleRotate = (index: number) => {
     onRotate(index, 90);
   };
 
-  const onPageLoadSuccess = useCallback((page: any, index: number) => {
+  const onPageLoadSuccess = useCallback((page: PDFPageProxy, index: number) => {
     const { width, height } = page.getViewport({ scale: 1 });
     setPageDimensions((prev) => {
       const newDimensions = [...prev];
@@ -104,7 +106,7 @@ const PDFViewer: React.FC<PDFViewerProps> = ({
                   <div
                     className="absolute inset-0 m-auto flex items-center justify-center"
                     style={{
-                      transform: `rotate(${rotations[index] || 0}deg)`,
+                      transform: `rotate(${rotations[index] ?? 0}deg)`,
                       transition: "transform 0.3s ease-in-out",
                     }}
                   >
@@ -113,7 +115,12 @@ const PDFViewer: React.FC<PDFViewerProps> = ({
                       pageNumber={index + 1}
                       rotate={0}
                       scale={scale}
-                      onLoadSuccess={(page) => onPageLoadSuccess(page, index)}
+                      onLoadSuccess={(page) =>
+                        onPageLoadSuccess(
+                          page as unknown as PDFPageProxy,
+                          index,
+                        )
+                      }
                       error={<div>Error loading page {index + 1}</div>}
                       loading={<div>Loading page {index + 1}...</div>}
                       className="max-h-full max-w-full object-contain"
