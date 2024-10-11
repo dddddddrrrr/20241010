@@ -9,7 +9,9 @@ const nextConfig = {
     reactStrictMode: true,
     webpack: (config, { isServer }) => {
       if (!isServer) {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
         config.resolve.fallback = {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
           ...config.resolve.fallback,
           fs: false,
           stream: false,
@@ -17,6 +19,7 @@ const nextConfig = {
         };
       }
   
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       config.module.rules.push({
         test: /pdf\.worker\.(min\.)?js/,
         type: "asset/resource",
@@ -25,6 +28,7 @@ const nextConfig = {
         },
       });
   
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return config;
     },
   };

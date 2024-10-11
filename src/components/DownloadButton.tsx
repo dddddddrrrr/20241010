@@ -27,7 +27,7 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({ file, rotations }) => {
     link.click();
   };
 
-  return <Button onClick={handleDownload}>Download Rotated PDF</Button>;
+  return <Button onClick={handleDownload}>Download</Button>;
 };
 
 export default DownloadButton;

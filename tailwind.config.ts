@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 import type { Config } from "tailwindcss";
 
 const config = {
@@ -109,6 +110,7 @@ const config = {
     },
   },
   plugins: [
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     require("tailwindcss-animate"),
     require("@tailwindcss/typography"),
     require("tailwind-scrollbar"),
